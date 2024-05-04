@@ -26,9 +26,9 @@ To run the application locally, follow these steps:
 4. Navigate to the `backend` directory: `cd backend`
 5. Navigate to the `frontend` directory: `cd ../frontend`
 6. Install frontend dependencies: `npm install`
-7. Run the frontend server: `npm start`
+7. Run the frontend server: `npm run dev`
 
-Now you can access the SKCET Ride Sharing Platform locally at `http://localhost:3000`.
+Now you can access the SKCET Ride Sharing Platform locally at `http://localhost:5173/`.
 
 ## Contributing 🤝
 
