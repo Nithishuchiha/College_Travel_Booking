@@ -1,0 +1,50 @@
+.homepage{
+    padding: 0;    
+}
+.Homepage-carLogo{
+    height: 25vh;
+    width: 100vw;
+    display: flex;
+    justify-content: right;
+    background-color: aquamarine;
+}
+.imgcar{
+    height: 25vh;
+    animation: moveCar 5s linear infinite; /* Define animation */
+}
+@keyframes moveCar {
+    0% {
+        margin-right:-0.1vh;
+    }
+    100% {
+        margin-right: 100vw;
+    }
+}
+.Homepage-outer1{
+    display: flex;
+    width: 100vw;
+    margin: 0;
+
+}
+.Homepage-outer1-publishride{
+    text-align: center;
+    width: 50vw;
+    height: 40vh;
+    vertical-align: middle;
+    
+    
+    background-color: black;
+    color: rgb(255, 255, 255);
+    padding-top: 25vh;
+    border-left: 2px solid aquamarine;
+}
+.Homepage-outer1-bookride{
+    text-align: center;
+    width: 50vw;
+    height: 40vh;
+    padding-top: 25vh;
+    background-color: black;
+    color: rgb(255, 255, 255);
+    border-right: 2px solid aquamarine;
+}
+
