@@ -1,9 +1,11 @@
-import SignUp from "./components/SignUp/SignUp";
+import JoySignInSideTemplate from "./components/SignIn/SignIn";
+// import SignUp from "./components/SignUp/SignUp";
 
 const App = () => {
   return (
     <div>
-      <SignUp />
+      {/* <SignUp /> */}
+      <JoySignInSideTemplate />
     </div>
   );
 };
