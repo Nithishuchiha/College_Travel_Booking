@@ -96,10 +96,27 @@ const department = [
   },
 ];
 
+const years = [
+  {
+    year: "I YEAR",
+  },
+  {
+    year: "II YEAR",
+  },
+  {
+    year: "III YEAR",
+  },
+  {
+    year: "IV YEAR",
+  },
+];
+
 export default function SignUp() {
+  // const isValid = departments && year;
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
+
     let formValues = {};
 
     for (let [key, value] of data.entries()) {
@@ -107,6 +124,8 @@ export default function SignUp() {
     }
 
     console.log(formValues);
+    console.log(year);
+    console.log(departments);
   };
 
   const theme = createTheme({
@@ -123,6 +142,11 @@ export default function SignUp() {
     },
   });
 
+  const [id, setIdImage] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [year, setYear] = useState("");
+  const [departments, setDepartments] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState(false);
   const [email, setEmail] = useState("");
@@ -199,6 +223,9 @@ export default function SignUp() {
                     autoComplete="given-name"
                     name="firstName"
                     required
+                    onChange={(event) => {
+                      setFirstName(event);
+                    }}
                     fullWidth
                     id="firstName"
                     label="First Name"
@@ -209,6 +236,9 @@ export default function SignUp() {
                   <TextField
                     required
                     fullWidth
+                    onChange={(event) => {
+                      setLastName(event);
+                    }}
                     id="lastName"
                     label="Last Name"
                     name="lastName"
@@ -274,9 +304,11 @@ export default function SignUp() {
 
                 <Grid item xs={12}>
                   <Autocomplete
-                    id="country-select-demo"
+                    required
+                    id="dept"
                     sx={{ width: 300 }}
                     options={department}
+                    onChange={(event, value) => setDepartments(value.dept)}
                     autoHighlight
                     getOptionLabel={(option) => option.dept}
                     renderOption={(props, option) => (
@@ -300,12 +332,45 @@ export default function SignUp() {
                     )}
                   />
                 </Grid>
+                <Grid item xs={12}>
+                  <Autocomplete
+                    id="year"
+                    sx={{ width: 300 }}
+                    options={years}
+                    autoHighlight
+                    getOptionLabel={(option) => option.year}
+                    onChange={(event, value) => setYear(value.year)}
+                    renderOption={(props, option) => (
+                      <Box
+                        component="li"
+                        sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                        {...props}
+                      >
+                        {option.year}
+                      </Box>
+                    )}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Year of Studying"
+                        inputProps={{
+                          ...params.inputProps,
+                          autoComplete: "new-password", // disable autocomplete and autofill
+                        }}
+                      />
+                    )}
+                  />
+                </Grid>
 
                 <Grid item xs={12}>
                   <TextField
+                    required
                     id="ID_IMG"
                     label="ID_CARD_IMG"
                     type="file"
+                    onChange={(Event) => {
+                      setIdImage(Event.target.files[0]);
+                    }}
                     InputLabelProps={{
                       shrink: true,
                       style: { color: "#1976d2" },
@@ -334,6 +399,17 @@ export default function SignUp() {
                 type="submit"
                 fullWidth
                 variant="contained"
+                disabled={
+                  !departments ||
+                  !year ||
+                  !firstName ||
+                  !lastName ||
+                  !password ||
+                  !phoneNumber ||
+                  phoneNumberError ||
+                  passwordError ||
+                  !id
+                }
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign Up
