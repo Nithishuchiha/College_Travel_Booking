@@ -1,12 +1,19 @@
 .homepage{
     padding: 0;    
 }
+.appbar-caranime{
+
+    background-image: url("E:\College_Travel_Booking\frontend\Travel_Booking\src\components\homepage\city.jpg");
+    background-position: bottom;
+    
+}
 .Homepage-carLogo{
     height: 25vh;
+
     width: 100vw;
     display: flex;
     justify-content: right;
-    background-color: aquamarine;
+   
 }
 .imgcar{
     height: 25vh;
