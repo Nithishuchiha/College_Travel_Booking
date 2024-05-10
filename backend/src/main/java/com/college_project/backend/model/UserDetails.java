@@ -1,12 +1,10 @@
 package com.college_project.backend.model;
 
-// package com.example.skcet_rapido.model;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class LoginDetails 
+public class UserDetails 
 {
 
     private String firstName;
@@ -21,10 +19,10 @@ public class LoginDetails
     private String registerNumber;
 
     // Constructors, getters, and setters
-    public LoginDetails() {
+    public UserDetails() {
     }
 
-    public LoginDetails(String firstName, String lastName, String email, String password, String phoneNumber, String department, String licenceId, String registerNumber) {
+    public UserDetails(String firstName, String lastName, String email, String password, String phoneNumber, String department, String licenceId, String registerNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
