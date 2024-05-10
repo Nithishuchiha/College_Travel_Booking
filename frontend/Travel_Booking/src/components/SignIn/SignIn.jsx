@@ -1,4 +1,4 @@
-import * as React from "react";
+// import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -8,10 +8,18 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import { useMediaQuery } from "@mui/material";
 import Grid from "@mui/material/Grid";
+import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import IconButton from "@mui/material/IconButton";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import NightsStayIcon from "@mui/icons-material/NightsStay";
+import darkBack from "../../assets/Car wallpaper 🖤✨.jfif";
+import whiteBack from "../../assets/white_backgroumd.jfif";
 
 function Copyright(props) {
   return (
@@ -33,9 +41,31 @@ function Copyright(props) {
 
 // TODO remove, this demo shouldn't need to reset the theme.
 
-const defaultTheme = createTheme();
+// const defaultTheme = createTheme();
 
 export default function SignInSide() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [darkMode, setDarkMode] = useState(prefersDarkMode);
+  // const darkBackground = URL("../../assets/dark_background.jfif");
+  // const whiteBackground = URl("../../assets/white_backgroumd.jfif");
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          background: {
+            default: darkMode ? "#000000" : "#f5f5f5", // Black background for dark mode, light grey for light mode
+          },
+          primary: {
+            main: darkMode ? "#f5f5f5" : "#000000", // Light grey for primary actions and highlights in dark mode, black for light mode
+          },
+          secondary: {
+            main: darkMode ? "#f5f5f5" : "#000000", // Pink for secondary actions and highlights
+          },
+          mode: darkMode ? "dark" : "light",
+        },
+      }),
+    [darkMode]
+  );
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -44,9 +74,12 @@ export default function SignInSide() {
       password: data.get("password"),
     });
   };
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+  };
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: "100vh" }}>
         <CssBaseline />
         <Grid
@@ -55,8 +88,7 @@ export default function SignInSide() {
           sm={4}
           md={7}
           sx={{
-            backgroundImage:
-              "url(https://source.unsplash.com/random?wallpapers)",
+            backgroundImage: `url(${darkMode ? darkBack : whiteBack})`,
             backgroundRepeat: "no-repeat",
             backgroundColor: (t) =>
               t.palette.mode === "light"
@@ -67,6 +99,15 @@ export default function SignInSide() {
           }}
         />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+          <Grid
+            item
+            xs={12}
+            style={{ display: "flex", justifyContent: "flex-start" }}
+          >
+            <IconButton onClick={toggleDarkMode}>
+              {darkMode ? <Brightness7Icon /> : <NightsStayIcon />}
+            </IconButton>
+          </Grid>
           <Box
             sx={{
               my: 8,

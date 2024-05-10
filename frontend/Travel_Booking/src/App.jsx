@@ -4,12 +4,13 @@
 import "./App.css";
 // import SignUp from "./components/SignUp/SignUp";
 // import SignUp from "./components/SignUp/SignUp";
-import Homepage from "./components/homepage/Homepage";
+import SignInSide from "./components/SignIn/SignIn";
+// import Homepage from "./components/homepage/Homepage";
 
 const App = () => {
   return (
     <div className="app">
-      <Homepage />
+      <SignInSide />
     </div>
   );
 };
