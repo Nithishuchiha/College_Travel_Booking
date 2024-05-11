@@ -8,7 +8,8 @@ import Checkbox from "@mui/material/Checkbox";
 import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
-import { useMediaQuery } from "@mui/material";
+import { useMediaQuery, InputAdornment } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import Grid from "@mui/material/Grid";
 import { useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
@@ -19,6 +20,7 @@ import IconButton from "@mui/material/IconButton";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import darkBack from "../../assets/Car wallpaper 🖤✨.jfif";
+
 import whiteBack from "../../assets/white_backgroumd.jfif";
 
 function Copyright(props) {
@@ -46,8 +48,11 @@ function Copyright(props) {
 export default function SignInSide() {
   const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [darkMode, setDarkMode] = useState(prefersDarkMode);
-  // const darkBackground = URL("../../assets/dark_background.jfif");
-  // const whiteBackground = URl("../../assets/white_backgroumd.jfif");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -66,13 +71,20 @@ export default function SignInSide() {
       }),
     [darkMode]
   );
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+    const emailData = data.get("email");
+    const passwordData = data.get("password");
+
+    const response = await fetch(
+      `http://localhost:8080/login/${emailData}/${passwordData}`
+    );
+    if (response) {
+      console.log(response);
+      console.log("login successfully");
+    } else console.log("Invalid username or password");
   };
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -145,9 +157,22 @@ export default function SignInSide() {
                 fullWidth
                 name="password"
                 label="Password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 id="password"
                 autoComplete="current-password"
+                InputProps={{
+                  // <-- This is where the toggle button is added
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowPassword}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
