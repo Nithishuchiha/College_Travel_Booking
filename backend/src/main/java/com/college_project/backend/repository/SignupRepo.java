@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 import com.college_project.backend.model.UserDetails;
 
 @Repository
-public interface LoginRepo extends JpaRepository<UserDetails,String> {
-   UserDetails findByEmail(String email);
+/**
+ * SignupRepo
+ */
+public interface SignupRepo extends JpaRepository<UserDetails, String> {
+
 }
