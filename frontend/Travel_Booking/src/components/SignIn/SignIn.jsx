@@ -81,8 +81,9 @@ export default function SignInSide() {
     const response = await fetch(
       `http://localhost:8080/login/${emailData}/${passwordData}`
     );
-    if (response) {
-      console.log(response);
+    if (response.status == "200") {
+      // console.log(response);
+
       console.log("login successfully");
     } else console.log("Invalid username or password");
   };
