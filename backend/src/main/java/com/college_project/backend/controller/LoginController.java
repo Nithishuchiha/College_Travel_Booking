@@ -4,7 +4,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.college_project.backend.service.LoginService;
 
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -19,12 +20,11 @@ public class LoginController
     }
     
     @GetMapping("/login/{email}/{password}")
-    public String login(@PathVariable String email,@PathVariable String password) {
+    public ResponseEntity<String> login(@PathVariable String email,@PathVariable String password) {
         if (loginService.checkLoginCredentials(email,password)) {
-            // System.out.print("successful login");
-            return "Login successful";
+            return ResponseEntity.ok("Login successful");
         } else {
-            return "Invalid email or password";
+            return  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid email or password");
         }
     }
     
