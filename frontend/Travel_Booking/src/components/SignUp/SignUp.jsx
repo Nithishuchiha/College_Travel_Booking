@@ -113,7 +113,7 @@ const years = [
 
 export default function SignUp() {
   // const isValid = departments && year;
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
@@ -126,6 +126,26 @@ export default function SignUp() {
     console.log(formValues);
     console.log(year);
     console.log(departments);
+
+    try {
+      const response = await fetch("http://localhost:8080/signup", {
+        // replace with your API endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formValues),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const json = await response.json();
+      console.log(json);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation: ", error);
+    }
   };
 
   const theme = createTheme({
@@ -407,8 +427,7 @@ export default function SignUp() {
                   !password ||
                   !phoneNumber ||
                   phoneNumberError ||
-                  passwordError ||
-                  !id
+                  passwordError
                 }
                 sx={{ mt: 3, mb: 2 }}
               >
