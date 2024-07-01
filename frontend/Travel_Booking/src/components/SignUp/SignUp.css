@@ -1,8 +1,10 @@
 * {
   margin: 0;
   border: 0;
+  padding: 0;
   background-image: url("../../assets/signupBackground.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+
   background-position: center;
 }
